@@ -1,1 +1,1 @@
-Application pomodoro, codée par Clément Schneider TP 2.1
+Application pomodoro, coded by Clément Schneider TP 2.1
