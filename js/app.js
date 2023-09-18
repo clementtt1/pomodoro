@@ -1,9 +1,10 @@
 let work_countdown = 1500
 let break_countdown = 300
 
-if(localStorage.getItem("Work time") != null){
+if(localStorage.getItem("Work time") !== null){
     work_countdown = parseInt(localStorage.getItem("Work time"))
 }
+console.log(work_countdown)
 
 if(localStorage.getItem("Break time") != null){
     break_countdown = parseInt(localStorage.getItem("Break time"))
@@ -18,6 +19,8 @@ const workDisplay = document.getElementById("work")
 const breakDisplay = document.getElementById("break")
 const worktimeInput = document.getElementById("work_time")
 const breaktimeInput = document.getElementById("break_time")
+const worktimeSelect = document.getElementById("select_work")
+const breaktimeSelect = document.getElementById("select_break")
 const numberInputs = document.querySelectorAll("input[type='number']")
 
 for (const input of numberInputs) {
@@ -30,18 +33,21 @@ for (const input of numberInputs) {
 worktimeInput.addEventListener("change", e => {
     reset()
     localStorage.setItem("Work time", work_countdown)
+    worktimeSelect.textContent = translationSecondsIntoMinuts(work_countdown)
     display(work_countdown)
 })
 
 breaktimeInput.addEventListener("change", e => {
     reset()
     localStorage.setItem("Break time", break_countdown)
+    breaktimeSelect.textContent = translationSecondsIntoMinuts(break_countdown)
 })
 
-start.addEventListener("click", e => isRunning())
+startButton.addEventListener("click", e => isRunning())
 
 function isRunning(){
     work_countdown -= 1
+    console.log(work_countdown)
     display(work_countdown)
     if (startButton.textContent == "Start") {
         startButton.textContent = "Reset"
@@ -52,12 +58,16 @@ function isRunning(){
                 work_countdown -= 1
                 display(work_countdown)
                 state = "Work"
+                workDisplay.classList.add("selected")
+                breakDisplay.classList.remove("selected")
             }
                 
             else if(break_countdown > 0){
                 break_countdown -= 1
                 display(break_countdown)
                 state = "Break"
+                breakDisplay.classList.add("selected")
+                workDisplay.classList.remove("selected")
             }
                 
             else {
@@ -66,9 +76,11 @@ function isRunning(){
                 break_countdown = breaktimeInput.value*60
                 display(break_countdown)
                 state = "Work"
+                workDisplay.classList.add("selected")
+                breakDisplay.classList.remove("selected")
             }
 
-            console.log(work_countdown, break_countdown, state)
+            // console.log(work_countdown, break_countdown, state)
         }, 100)
     }
     else{
