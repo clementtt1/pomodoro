@@ -1,11 +1,42 @@
-let work_countdown = document.getElementById("work_time")
+let work_countdown = 1500
 let break_countdown = 300
+
+if(localStorage.getItem("Work time") != null){
+    work_countdown = parseInt(localStorage.getItem("Work time"))
+}
+
+if(localStorage.getItem("Break time") != null){
+    break_countdown = parseInt(localStorage.getItem("Break time"))
+}
+
 let ID = 0
+let state = "Work"
 
 const timeSpan = document.getElementById("time")
 const startButton = document.getElementById("start")
 const workDisplay = document.getElementById("work")
 const breakDisplay = document.getElementById("break")
+const worktimeInput = document.getElementById("work_time")
+const breaktimeInput = document.getElementById("break_time")
+const numberInputs = document.querySelectorAll("input[type='number']")
+
+for (const input of numberInputs) {
+    input.addEventListener("keydown", e => {
+        if (e.key != "Backspace" && isNaN(parseInt(e.key)))
+            e.preventDefault()
+    })
+}
+
+worktimeInput.addEventListener("change", e => {
+    reset()
+    localStorage.setItem("Work time", work_countdown)
+    display(work_countdown)
+})
+
+breaktimeInput.addEventListener("change", e => {
+    reset()
+    localStorage.setItem("Break time", break_countdown)
+})
 
 start.addEventListener("click", e => isRunning())
 
@@ -17,33 +48,31 @@ function isRunning(){
             ID = setInterval(() => {
 
             //countdown of work time or for break time
-            if(work_countdown >= 0){
+            if(work_countdown > 0){
                 work_countdown -= 1
                 display(work_countdown)
-
+                state = "Work"
             }
                 
-            else if(break_countdown >= 0){
+            else if(break_countdown > 0){
                 break_countdown -= 1
                 display(break_countdown)
+                state = "Break"
             }
                 
             else {
-                work_countdown = 1500
+                work_countdown = worktimeInput.value*60
                 display(work_countdown)
-                break_countdown = 300
+                break_countdown = breaktimeInput.value*60
                 display(break_countdown)
+                state = "Work"
             }
 
-            console.log(work_countdown, break_countdown)
-        }, 1000)
+            console.log(work_countdown, break_countdown, state)
+        }, 100)
     }
     else{
-        clearInterval(ID)
-        startButton.textContent = "Start"
-        work_countdown = 1500
-        break_countdown = 300
-        display(work_countdown)
+        reset()
     }
 }
 
@@ -58,5 +87,24 @@ function translationSecondsIntoMinuts(time) {
 
 function display(time) {
     let minuts = translationSecondsIntoMinuts(time)
-    minuts < 10? timeSpan.textContent = "0" + minuts + ":" + ((time - minuts*60) < 10? "0" + (time - minuts*60): (time - minuts*60)): timeSpan.textContent = minuts + ":" + ((time - minuts*60) < 10? "0" + (time - minuts*60): (time - minuts*60))
+    if(minuts < 10){
+        if((time - minuts*60) < 10)
+            timeSpan.textContent = "0" + minuts + ":0" + (time - minuts*60)
+        else
+            timeSpan.textContent = "0" + minuts + ":" + (time - minuts*60)
+    }
+    else{
+        if((time - minuts*60) < 10)
+            timeSpan.textContent = minuts + ":0" + (time - minuts*60)
+        else
+            timeSpan.textContent = minuts + ":" + (time - minuts*60)
+    }
+}
+
+function reset(){
+    clearInterval(ID)
+    startButton.textContent = "Start"
+    work_countdown = worktimeInput.value*60
+    break_countdown = breaktimeInput.value*60
+    display(work_countdown)
 }
