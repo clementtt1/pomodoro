@@ -14,6 +14,6 @@ This resets the application and you just have to restart it for your settings to
 If you leave the page, the timer will be set to your old settings.
 
 <h1>Creator ✏️</h1>
-Application developped by Clément Schneider.
+This application of pomodoro has been developped by Clément Schneider.
 
 <h3>Happy Pomodoro-ing! 🍻</h3>
