@@ -1,0 +1,57 @@
+* {
+    text-align: center;
+}
+
+body{
+    background-color: white;
+}
+
+#title{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#start {
+    margin-top: 20px;
+}
+
+#time{
+    font-size: 50px;
+    display: block;
+}
+
+.timer{
+    border: 1px solid;
+    border-radius: 150px;
+    width: 300px;
+    height: 300px;
+    margin: 30px auto;
+    padding-top: 80px;
+    background-color: #D5F6F8;
+}
+
+#work, #break{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.select{
+    display: block;
+}
+
+.select label, .select span{
+    display: block;
+}
+
+#start{
+    border-radius: 5px;
+    background-color: white;
+}
+
+.selected{
+    background-color: red;
+}
