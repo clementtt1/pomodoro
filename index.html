@@ -1,3 +1,5 @@
+<!-- Clément Schneider TD 2-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +11,20 @@
 </head>
 <body>
     <h1 id="title"> Pomodoro Timer </h1>
+
+    <!-- State in progress. -->
     <div class="box">
         <span id="work" class="selected">Work</span>
         <span id="break">Break</span>
     </div>
+
+    <!-- Timer with Start/Reset button. -->
     <div class="timer">
-        <span id="time">25:00</span>
+        <span id="time">Start timer</span>
         <button id="start">Start</button>
     </div>
 
+    <!-- Personalized choice of working and break times. -->
     <div class="select">
         <label>Work time </label>
         <input type="range" id="work_time" min="1" max="60" value="25">
