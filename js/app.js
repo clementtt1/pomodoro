@@ -31,13 +31,13 @@ startButton.addEventListener("click", e => isRunning())
 worktimeInput.addEventListener("change", e => {
     reset()
     localStorage.setItem("Work time", work_countdown)
-    worktimeSelect.textContent = translationSecondsIntoMinuts(work_countdown)
+    worktimeSelect.textContent = translationSecondsIntoMinutes(work_countdown)
     display(work_countdown)
 })
 breaktimeInput.addEventListener("change", e => {
     reset()
     localStorage.setItem("Break time", break_countdown)
-    breaktimeSelect.textContent = translationSecondsIntoMinuts(break_countdown)
+    breaktimeSelect.textContent = translationSecondsIntoMinutes(break_countdown)
 })
 
 //Function called when the user press the start button.
@@ -83,32 +83,32 @@ function isRunning(){
     }
 }
 
-//This function translate seconds into minuts.
-function translationSecondsIntoMinuts(time) {
-    let minuts = 0
+//This function translate seconds into minutes.
+function translationSecondsIntoMinutes(time) {
+    let minutes = 0
     while(time >= 60){
         time -= 60
-        minuts += 1
+        minutes += 1
     }
-    return minuts
+    return minutes
 }
 
 //Function of display of the time in hours conventions : hh:mm.
 function display(time) {
-    let minuts = translationSecondsIntoMinuts(time)
+    let minutes = translationSecondsIntoMinutes(time)
 
     //Put a '0' in front of all number between 0 and 9.
-    if(minuts < 10){
-        if((time - minuts*60) < 10)
-            timeSpan.textContent = "0" + minuts + ":0" + (time - minuts*60)
+    if(minutes < 10){
+        if((time - minutes*60) < 10)
+            timeSpan.textContent = "0" + minutes + ":0" + (time - minutes*60)
         else
-            timeSpan.textContent = "0" + minuts + ":" + (time - minuts*60)
+            timeSpan.textContent = "0" + minutes + ":" + (time - minutes*60)
     }
     else{
-        if((time - minuts*60) < 10)
-            timeSpan.textContent = minuts + ":0" + (time - minuts*60)
+        if((time - minutes*60) < 10)
+            timeSpan.textContent = minutes + ":0" + (time - minutes*60)
         else
-            timeSpan.textContent = minuts + ":" + (time - minuts*60)
+            timeSpan.textContent = minutes + ":" + (time - minutes*60)
     }
 }
 
